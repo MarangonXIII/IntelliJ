@@ -21,29 +21,22 @@ public class ServidorRPCManual {
         try (InputStream is = socket.getInputStream();
              OutputStream os = socket.getOutputStream()) {
 
-            // Buffer para receber os 8 bytes (2 inteiros)
             byte[] buffer = new byte[8];
             int bytesLidos = 0;
-
-            // DESEMPACOTAMENTO MANUAL: Lê exatamente 8 bytes
             while (bytesLidos < 8) {
                 int lido = is.read(buffer, bytesLidos, 8 - bytesLidos);
                 if (lido == -1) throw new IOException("Conexão fechada prematuramente");
                 bytesLidos += lido;
             }
 
-            // Converte bytes para inteiros
             ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
             int num1 = byteBuffer.getInt();
             int num2 = byteBuffer.getInt();
 
             System.out.println("Parâmetros desempacotados manualmente: " + num1 + ", " + num2);
 
-            // Executa procedimento
             int resultado = num1 + num2;
             System.out.println("Soma: " + num1 + " + " + num2 + " = " + resultado);
-
-            // EMPACOTAMENTO MANUAL: Converte resultado para bytes
             byte[] resposta = ByteBuffer.allocate(4).putInt(resultado).array();
             os.write(resposta);
             os.flush();

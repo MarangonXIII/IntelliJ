@@ -19,15 +19,12 @@ public class ClienteCalculadora {
         System.out.println("-".repeat(60));
 
         try {
-            // Localizar o RMI Registry
             System.out.print("Procurando servidor RMI...");
             Registry registry = LocateRegistry.getRegistry(HOST, PORTA);
 
-            // Obter o stub remoto
             System.out.print("Obtendo stub remoto...");
             Calculadora calculadora = (Calculadora) registry.lookup(SERVICO);
 
-            // Testar conexão
             System.out.print("Testando conexão...");
             String status = calculadora.getStatusServidor();
             System.out.println(status);
@@ -37,7 +34,6 @@ public class ClienteCalculadora {
             System.out.println("Agora você pode usar a calculadora remota");
             System.out.println("=".repeat(60));
 
-            // Menu interativo
             executarMenu(calculadora, scanner);
 
         } catch (Exception e) {
@@ -93,7 +89,7 @@ public class ClienteCalculadora {
                 }
             } catch (Exception e) {
                 System.err.println("Entrada inválida! Digite um número.");
-                scanner.nextLine(); // Limpar buffer
+                scanner.nextLine();
             }
         }
     }

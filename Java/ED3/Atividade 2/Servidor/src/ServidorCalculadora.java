@@ -58,7 +58,6 @@ public class ServidorCalculadora implements Calculadora {
 
     public static void main(String[] args) {
         try {
-            // Configurações do servidor
             String host = "localhost";
             int porta = 1099;
             String nomeServico = "CalculadoraService";
@@ -72,15 +71,12 @@ public class ServidorCalculadora implements Calculadora {
             System.out.println("Iniciado em: " + new Date());
             System.out.println("-".repeat(60));
 
-            // Criar instância do servidor
             ServidorCalculadora servidor = new ServidorCalculadora();
             System.out.println("Objeto servidor instanciado");
 
-            // Exportar objeto remoto
             Calculadora stub = (Calculadora) UnicastRemoteObject.exportObject(servidor, 0);
             System.out.println("Stub exportado na porta 0 (automática)");
 
-            // Criar ou conectar ao RMI Registry
             Registry registry;
             try {
                 registry = LocateRegistry.createRegistry(porta);
@@ -90,7 +86,6 @@ public class ServidorCalculadora implements Calculadora {
                 System.out.println("Conectado ao RMI Registry existente na porta " + porta);
             }
 
-            // Registrar o serviço
             registry.rebind(nomeServico, stub);
             System.out.println("Serviço registrado como: '" + nomeServico + "'");
 
@@ -99,7 +94,6 @@ public class ServidorCalculadora implements Calculadora {
             System.out.println("Aguardando chamadas remotas de clientes...");
             System.out.println("=".repeat(60));
 
-            // Manter servidor ativo indefinidamente
             while (true) {
                 Thread.sleep(1000);
             }

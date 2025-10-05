@@ -3,7 +3,7 @@ import java.net.*;
 import java.nio.charset.StandardCharsets;
 
 public class ClienteUDP {
-    private static final String GRUPO_MULTICAST = "230.0.0.1"; // Endereço multicast
+    private static final String GRUPO_MULTICAST = "230.0.0.1";
     private static final int PORTA = 12345;
 
     public static void main(String[] args) {

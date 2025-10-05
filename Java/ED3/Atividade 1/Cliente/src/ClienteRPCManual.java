@@ -15,21 +15,16 @@ public class ClienteRPCManual {
 
             System.out.println("\nChamando somar(" + num1 + ", " + num2 + ")");
 
-            // EMPACOTAMENTO MANUAL: Converte inteiros para bytes
             ByteBuffer buffer = ByteBuffer.allocate(8);
             buffer.putInt(num1);
             buffer.putInt(num2);
             byte[] requisicao = buffer.array();
-
             System.out.println("Parâmetros empacotados manualmente: " + bytesParaHex(requisicao));
 
-            // Envia requisição
             os.write(requisicao);
             os.flush();
-
             System.out.println("Aguardando resposta (bloqueado)...");
 
-            // DESEMPACOTAMENTO MANUAL: Lê resposta
             byte[] respostaBytes = new byte[4];
             int bytesLidos = 0;
             while (bytesLidos < 4) {
