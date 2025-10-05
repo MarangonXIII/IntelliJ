@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: catalogo-produtos
+  main:
+    web-application-type: servlet
+  web:
+    resources:
+      add-mappings: false
+  datasource:
+    name: catalogo-produtos
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/catalogo-produtos
+    username: postgres
+    password: Anikiller13
+
+server:
+  port:8080
