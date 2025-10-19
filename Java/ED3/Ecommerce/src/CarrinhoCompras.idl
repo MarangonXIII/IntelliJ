@@ -1,0 +1,47 @@
+module ECommerce {
+
+    struct CartItem {
+        string productId;
+        string productName;
+        double unitPrice;
+        long quantity;
+        double subtotal;
+    };
+
+    struct Cart {
+        string userId;
+        string cartId;
+        sequence<CartItem> items;
+        double total;
+        string status;
+        timestamp lastUpdated;
+    };
+
+    struct Order {
+        string orderId;
+        string userId;
+        timestamp orderDate;
+        sequence<CartItem> items;
+        double total;
+        string status;
+        string shippingAddress;
+        string paymentMethod;
+        string paymentStatus;
+        string trackingNumber;
+    };
+
+    interface ShoppingCart {
+
+        boolean addItem(in string userId, in string productId, in long quantity);
+        boolean removeItem(in string userId, in string productId);
+        boolean updateQuantity(in string userId, in string productId, in long quantity);
+        Cart getCart(in string userId);
+        boolean clearCart(in string userId);
+
+        Order checkout(in string userId, in string paymentMethod);
+        double calculateTotal(in string userId);
+        sequence<Order> getOrderHistory(in string userId);
+        Order getOrderDetails(in string orderId);
+        boolean healthCheck();
+    };
+};

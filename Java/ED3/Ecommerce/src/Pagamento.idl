@@ -1,0 +1,47 @@
+module ECommerce {
+
+    struct PaymentInfo {
+        string paymentId;
+        string orderId;
+        double amount;
+        string paymentMethod;
+        string cardNumber;
+        string cardHolder;
+        string expiryDate;
+        string cvv;
+        string payerName;
+        string payerEmail;
+        string payerCpf;
+    };
+
+    struct PaymentResult {
+        string transactionId;
+        boolean success;
+        string status;
+        string message;
+        string authorizationCode;
+        timestamp transactionDate;
+        double amountProcessed;
+    };
+
+    struct PaymentStatus {
+        string paymentId;
+        string status;
+        string details;
+        timestamp lastUpdated;
+        double amount;
+        string currency;
+    };
+
+    interface PaymentService {
+        PaymentResult processPayment(in PaymentInfo paymentInfo);
+        PaymentResult processPaymentWithOrder(in Order order, in string paymentMethod);
+
+        PaymentStatus checkPaymentStatus(in string paymentId);
+        boolean cancelPayment(in string paymentId);
+        boolean refundPayment(in string paymentId, in double amount);
+        string generatePaymentQRCode(in double amount, in string description);
+        boolean validatePaymentMethod(in string paymentMethod);
+        boolean healthCheck();
+    };
+};

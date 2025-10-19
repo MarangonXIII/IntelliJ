@@ -1,0 +1,50 @@
+module ECommerce {
+
+    struct Product {
+        string id;
+        string name;
+        string description;
+        double price;
+        string category;
+        int stock;
+        string manufacturer;
+    };
+
+    struct CatalogStatistics {
+        long totalProducts;
+        long totalCategories;
+        double averagePrice;
+        double totalInventoryValue;
+        Product mostExpensiveProduct;
+        Product leastExpensiveProduct;
+        map<string, long> productsByCategory;
+        long outOfStockCount;
+    };
+
+    struct ProductPage {
+        sequence<Product> products;
+        long currentPage;
+        long pageSize;
+        long totalPages;
+        long totalProducts;
+        boolean hasNext;
+        boolean hasPrevious;
+    };
+
+    interface ProductCatalog {
+        Product findProductByName(in string name);
+        Product findProductById(in string id);
+        sequence<Product> getAllProducts();
+        sequence<Product> findProductsByCategory(in string category);
+
+        boolean updateStock(in string productId, in long quantity);
+        boolean addProduct(in Product product);
+
+        sequence<Product> filterProducts(in map<string, any> filters);
+        CatalogStatistics getCatalogStatistics();
+        ProductPage getProductsPaginated(in long page, in long pageSize);
+        sequence<string> getAllCategories();
+
+        boolean healthCheck();
+    };
+};
