@@ -1,0 +1,70 @@
+// Excecoes.idl
+exception ContaNaoEncontrada {
+    string numeroConta;
+    string mensagem;
+    datahora dataHora;
+};
+
+exception SaldoInsuficiente {
+    string numeroConta;
+    double saldoAtual;
+    double valorTentado;
+    string mensagem;
+};
+
+exception ValorInvalido {
+    double valor;
+    string mensagem;
+    string regraValidacao;
+};
+
+exception TransacaoNaoEncontrada {
+    string idTransacao;
+    string mensagem;
+};
+
+exception ContaInvalida {
+    string idConta;
+    string mensagem;
+    string erroValidacao;
+};
+
+exception ServicoIndisponivel {
+    string nomeServico;
+    string mensagem;
+    datahora estimativaRecuperacao;
+    string endpointAlternativo;
+};
+
+exception PeriodoInvalido {
+    data dataInicio;
+    data dataFim;
+    string mensagem;
+};
+
+exception TransacaoNaoCancelavel {
+    string idTransacao;
+    string motivo;
+    string statusAtual;
+};
+
+exception DadosInvalidos {
+    string campo;
+    string valor;
+    string mensagem;
+};
+
+exception StatusInvalido {
+    string status;
+    string mensagem;
+};
+
+exception DataInvalida {
+    data data;
+    string mensagem;
+};
+
+exception ComprovanteNaoEncontrado {
+    string idComprovante;
+    string mensagem;
+};
