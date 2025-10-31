@@ -1,0 +1,41 @@
+// Conta.idl - Estrutura para dados da conta
+struct Conta {
+    string numeroConta;
+    string nomeCliente;
+    double saldo;
+    string tipoConta;    // "CORRENTE", "POUPANÇA", "EMPRESARIAL"
+    data dataCriacao;
+    string status;       // "ATIVA", "INATIVA", "BLOQUEADA"
+};
+
+// Transacao.idl - Estrutura para transações
+struct Transacao {
+    string idTransacao;
+    string contaOrigem;
+    string contaDestino;
+    double valor;
+    string descricao;
+    datahora dataHora;
+    string tipoTransacao; // "TRANSFERENCIA", "DEPOSITO", "SAQUE", "PAGAMENTO"
+    string status;        // "PENDENTE", "CONCLUIDA", "FALHOU"
+};
+
+// ContaPagamento.idl - Estrutura para contas a pagar
+struct ContaPagamento {
+    string idConta;
+    string codigoBarras;
+    string nomeEmpresa;
+    double valor;
+    data dataVencimento;
+    string status;       // "PENDENTE", "PAGA", "VENCIDA"
+};
+
+// ComprovantePagamento.idl - Comprovante de pagamento
+struct ComprovantePagamento {
+    string idComprovante;
+    string idConta;
+    string numeroConta;
+    double valorPago;
+    datahora dataPagamento;
+    string status;       // "SUCESSO", "FALHA", "PENDENTE"
+};
